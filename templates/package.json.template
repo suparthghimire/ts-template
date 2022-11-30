@@ -1,0 +1,20 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.3.21",
+    "@types/node": "^18.11.9",
+    "chokidar": "^3.5.3",
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.3"
+  },
+  "scripts": {
+    "dev": "concurrently \"yarn watch-compile\" \"yarn watch-dev\"",
+    "watch-compile": "swc src -w --out-dir {{build__dir__name}}",
+    "watch-dev": "nodemon --watch \"dist/**/*\" -e js ./{{build__dir__name}}/{{entry__file__name}}.js",
+    "build": "swc src -d {{build__dir__name}}",
+    "start": "NODE_ENV=production node {{build__dir__name}}/{{entry__file__name}}.js",
+    "clean": "rm -rf {{build__dir__name}}"
+  }
+}
