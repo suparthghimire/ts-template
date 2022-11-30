@@ -47,16 +47,25 @@ class TemplateService {
       if (!overwrite) return;
     }
 
-    for (let i = 0; i < strippedNames.length; i++) {
-      const strippedName = strippedNames[i];
-      let fileContent = fileContents[i];
+    const unresolvedConfigFiles = strippedNames.map((fileName, index) => {
+      let fileContent = fileContents[index];
       fileContent = fileContent.replace(/{{build__dir__name}}/g, buildDirName);
       fileContent = fileContent.replace(
         /{{entry__file__name}}/g,
         entryFileName
       );
-      await fs.writeFile(path.join(savePath, strippedName), fileContent);
-    }
+      fs.writeFile(path.join(savePath, fileName), fileContent);
+    });
+    await Promise.all(unresolvedConfigFiles);
+    // create src directory
+    await fs.mkdir(path.join(savePath, "src"), {
+      recursive: true,
+    });
+    // create a file with the entry file name inside the src directory
+    await fs.writeFile(
+      path.join(savePath, "src", entryFileName + ".ts"),
+      `console.log("Hello World!")`
+    );
   }
 }
 
