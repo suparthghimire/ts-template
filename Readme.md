@@ -15,13 +15,13 @@ This is a simple script to initialize a typescript project for development and p
 - npm
 
 ```bash
-npm install -g ts-template
+npm install -g @suparth_ghimire/ts-template
 ```
 
 - yarn
 
 ```bash
-yarn add -g ts-template
+yarn add -g @suparth_ghimire/ts-template
 ```
 
 ## Initialize your Project

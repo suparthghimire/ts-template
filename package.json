@@ -25,10 +25,12 @@
     "dist",
     "template"
   ],
-  "name": "@suparth/ts-template",
-  "version": "1.0.0",
-  "types": "",
+  "name": "@suparth_ghimire/ts-template",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "author": "suparthghimire <suparthnarayanghimire2014@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }
