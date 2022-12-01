@@ -4,17 +4,10 @@
       "syntax": "typescript",
       "tsx": false,
       "decorators": true,
-      "dynamicImport": true
+      "dynamicImport": true,
+      "include": ["./src/**/*"]
     },
     "target": "es2020",
-    "paths": {
-      "@routes/*": [
-        "./src/routes/*"
-      ],
-      "@middlewares/*": [
-        "./src/middlewares/*"
-      ]
-    },
     "baseUrl": "."
   },
   "module": {

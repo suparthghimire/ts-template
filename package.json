@@ -13,9 +13,10 @@
   "preferGlobal": true,
   "bin": "./dist/index.js",
   "scripts": {
-    "build": "swc src -d dist",
+    "build": "yarn clean; swc src -d dist; cp ./src/templates ./dist/templates -r",
     "start": "NODE_ENV=production node dist/index.js",
-    "prepare": "yarn build"
+    "prepare": "yarn build",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "commander": "^9.4.1",

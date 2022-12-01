@@ -18,7 +18,7 @@ class TemplateService {
     buildDirName: string;
     entryFileName: string;
   }) {
-    const templateDir = path.join(process.cwd(), "templates");
+    const templateDir = path.join(__dirname, "templates");
     const filesNames = await fs.readdir(templateDir);
     const fileContents = await Promise.all(
       filesNames.map((fileName) => {
@@ -26,6 +26,7 @@ class TemplateService {
         return fs.readFile(filePath, "utf-8");
       })
     );
+
     const strippedNames = filesNames.map((fileName) => {
       return fileName.replace(".template", "");
     });
