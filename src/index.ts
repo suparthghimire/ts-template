@@ -41,7 +41,7 @@ class TemplateService {
         {
           type: "confirm",
           name: "overwrite",
-          message: `Directory ${buildDirName} already exists. Overwrite its Contents?`,
+          message: `Directory ${projectDirName} already exists. Overwrite its Contents?`,
           default: false,
         },
       ]);
