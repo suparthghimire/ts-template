@@ -2,6 +2,9 @@
 
 This is a simple script to initialize a typescript project for development and production environment with a single command. You dont have to initialize scripts for compilers and other stuffs. This script will do it for you.
 
+[npm](https://www.npmjs.com/package/@suparth_ghimire/ts-template)
+[Github](https://github.com/suparthghimire/ts-template)
+
 ## Files Generated
 
 - package.json
