@@ -1,10 +1,10 @@
 {
   "devDependencies": {
     "@changesets/cli": "^2.27.7",
-    "@types/inquirer": "^9.0.3",
-    "@types/node": "^18.11.9",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.14.10",
     "tsup": "^8.1.0",
-    "typescript": "^4.9.3"
+    "typescript": "^5.5.3"
   },
   "preferGlobal": true,
   "bin": "./dist/index.js",
@@ -18,9 +18,9 @@
     "start": "pnpm build & pnpm start-only"
   },
   "dependencies": {
-    "commander": "^9.4.1",
+    "commander": "^12.1.0",
     "dotenv": "^16.4.5",
-    "inquirer": "^8.0.0"
+    "inquirer": "^9.3.5"
   },
   "files": [
     "dist",
