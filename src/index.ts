@@ -1,74 +1,13 @@
 #!/usr/bin/env node
 
-import fs from "fs/promises";
-import fsSync from "fs";
-import path from "path";
 import { program } from "commander";
+import { TemplateService } from "./services/template.service";
+import dotenv from "dotenv";
 import prompt from "inquirer";
 
+dotenv.config();
+
 program.version("0.0.1");
-
-class TemplateService {
-  static async GetTemplates({
-    buildDirName,
-    entryFileName,
-    projectDirName = ".",
-  }: {
-    projectDirName?: string;
-    buildDirName: string;
-    entryFileName: string;
-  }) {
-    const templateDir = path.join(__dirname, "templates");
-    const filesNames = await fs.readdir(templateDir);
-    const fileContents = await Promise.all(
-      filesNames.map((fileName) => {
-        const filePath = path.join(templateDir, fileName);
-        return fs.readFile(filePath, "utf-8");
-      })
-    );
-
-    const strippedNames = filesNames.map((fileName) => {
-      return fileName.replace(".template", "");
-    });
-
-    const savePath = path.join(process.cwd(), projectDirName);
-
-    const pathExists = fsSync.existsSync(savePath);
-
-    if (!pathExists) await fs.mkdir(savePath, { recursive: true });
-    else {
-      const { overwrite } = await prompt.prompt([
-        {
-          type: "confirm",
-          name: "overwrite",
-          message: `Directory ${projectDirName} already exists. Overwrite its Contents?`,
-          default: false,
-        },
-      ]);
-      if (!overwrite) return;
-    }
-
-    const unresolvedConfigFiles = strippedNames.map((fileName, index) => {
-      let fileContent = fileContents[index];
-      fileContent = fileContent.replace(/{{build__dir__name}}/g, buildDirName);
-      fileContent = fileContent.replace(
-        /{{entry__file__name}}/g,
-        entryFileName
-      );
-      fs.writeFile(path.join(savePath, fileName), fileContent);
-    });
-    await Promise.all(unresolvedConfigFiles);
-    // create src directory
-    await fs.mkdir(path.join(savePath, "src"), {
-      recursive: true,
-    });
-    // create a file with the entry file name inside the src directory
-    await fs.writeFile(
-      path.join(savePath, "src", entryFileName + ".ts"),
-      `console.log("Hello World!")`
-    );
-  }
-}
 
 const questions = [
   {
@@ -92,19 +31,33 @@ const questions = [
   },
 ];
 
-program
-  .command("init")
-  .alias("i")
-  .description("Initialize TS Project")
-  .action(async () => {
-    prompt.prompt(questions).then(async (answers) => {
-      const { projectDirName, entryFileName, buildDirName } = answers;
-      await TemplateService.GetTemplates({
-        projectDirName,
-        entryFileName,
-        buildDirName,
+if (process.env.NODE_ENV === "development") {
+  (async () => {
+    const projectDirName = "output";
+    const entryFileName = "index";
+    const buildDirName = "dist";
+
+    await TemplateService.GetTemplates({
+      projectDirName,
+      entryFileName,
+      buildDirName,
+    });
+  })();
+} else {
+  program
+    .command("init")
+    .alias("i")
+    .description("Initialize TS Project")
+    .action(async () => {
+      prompt.prompt(questions).then(async (answers) => {
+        const { projectDirName, entryFileName, buildDirName } = answers;
+        await TemplateService.GetTemplates({
+          projectDirName,
+          entryFileName,
+          buildDirName,
+        });
       });
     });
-  });
 
-program.parse(process.argv);
+  program.parse(process.argv);
+}
