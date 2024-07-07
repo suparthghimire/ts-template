@@ -20,9 +20,9 @@ jobs:
       - name: Create Release PR or Publish to Npm
         id: changesets
         uses: changesets/action@v1
-        with:
-          publish: pnpm run build
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        with:
+          publish: pnpm run build
 
