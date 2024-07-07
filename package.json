@@ -1,9 +1,10 @@
 {
   "devDependencies": {
-    "@types/inquirer": "^9.0.3",
-    "@types/node": "^18.11.9",
+    "@changesets/cli": "^2.27.7",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.14.10",
     "tsup": "^8.1.0",
-    "typescript": "^4.9.3"
+    "typescript": "^5.5.3"
   },
   "preferGlobal": true,
   "bin": "./dist/index.js",
@@ -14,19 +15,20 @@
     "build-only": "tsup --onSuccess 'pnpm copy:template'",
     "build": "pnpm type-check && pnpm build-only",
     "start-only": "node dist/index.js init",
-    "start": "pnpm build & pnpm start-only"
+    "start": "pnpm build & pnpm start-only",
+    "release": "pnpm run build && changeset publish"
   },
   "dependencies": {
-    "commander": "^9.4.1",
+    "commander": "^12.1.0",
     "dotenv": "^16.4.5",
-    "inquirer": "^8.0.0"
+    "inquirer": "^9.3.5"
   },
   "files": [
     "dist",
     "templates"
   ],
   "name": "@suparth_ghimire/ts-template",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "main": "dist/index.js",
   "author": "suparthghimire <suparthnarayanghimire2014@gmail.com>",
   "license": "MIT",
