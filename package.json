@@ -1,25 +1,24 @@
 {
   "devDependencies": {
-    "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.3.21",
-    "@types/commander": "^2.12.2",
     "@types/inquirer": "^9.0.3",
     "@types/node": "^18.11.9",
-    "chokidar": "^3.5.3",
-    "concurrently": "^7.6.0",
-    "nodemon": "^2.0.20",
+    "tsup": "^8.1.0",
     "typescript": "^4.9.3"
   },
   "preferGlobal": true,
   "bin": "./dist/index.js",
   "scripts": {
-    "build": "yarn clean; swc src -d dist; cp ./src/templates ./dist/templates -r",
-    "start": "NODE_ENV=production node dist/index.js",
-    "prepare": "yarn build",
-    "clean": "rm -rf dist"
+    "copy:template": "cp -r src/templates dist",
+    "dev": "tsup --watch --onSuccess 'pnpm copy:template && pnpm start-only'",
+    "type-check": "tsc --noEmit -p .",
+    "build-only": "tsup --onSuccess 'pnpm copy:template'",
+    "build": "pnpm type-check && pnpm build-only",
+    "start-only": "node dist/index.js init",
+    "start": "pnpm build & pnpm start-only"
   },
   "dependencies": {
     "commander": "^9.4.1",
+    "dotenv": "^16.4.5",
     "inquirer": "^8.0.0"
   },
   "files": [
@@ -27,7 +26,7 @@
     "templates"
   ],
   "name": "@suparth_ghimire/ts-template",
-  "version": "1.0.7",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "author": "suparthghimire <suparthnarayanghimire2014@gmail.com>",
   "license": "MIT",
