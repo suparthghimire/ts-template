@@ -1,31 +1,28 @@
 # Typescript Project Initializer
 
-This is a simple script to initialize a typescript project for development and production environment with a single command. You dont have to initialize scripts for compilers and other stuffs. This script will do it for you.
+This is a simple script to initialize a typescript project for development and production environment with a single command. You dont have to initialize scripts for compilers and other stuffs. This script will do it for you. 
+
+> pnpm is used as default package manager. You can change it to others if you want
 
 [npm](https://www.npmjs.com/package/@suparth_ghimire/ts-template)
 [Github](https://github.com/suparthghimire/ts-template)
 
 ## Files Generated
 
-- package.json
-- tsconfig.json
-- .gitignore
-- .swcrc
-- src/index.ts
+- 📄 package.json
+- 📄 tsconfig.json
+- 📄 tsup.config.ts
+- 📄 .gitignore
+- 📄 src/index.ts
+- 📄 pnpm-lock.yaml
 
 ## Installation
 
-- npm
 
 ```bash
-npm install -g @suparth_ghimire/ts-template
+pnpm install -g @suparth_ghimire/ts-template
 ```
 
-- yarn
-
-```bash
-yarn add -g @suparth_ghimire/ts-template
-```
 
 ## Initialize your Project
 
@@ -37,58 +34,26 @@ Answer 3 Questions that the prompt asks you
 
 ## Install Packages
 
-- npm
+- pnpm
 
-```bash
-npm install
 ```
-
-- yarn
-
-```bash
-yarn
+pnpm install
 ```
 
 ## Run your Project
 
 **Development**
 
-- npm
-
 ```bash
-npm run dev
-```
-
-- yarn
-
-```bash
-yarn dev
+pnpm run dev
 ```
 
 **Build**
-
-- npm
-
 ```bash
-npm run build
+pnpm build
+```
+**Start**
+```bash
+pnpm start
 ```
 
-- yarn
-
-```bash
-yarn build
-```
-
-**Production**
-
-- npm
-
-```bash
-npm run start
-```
-
-- yarn
-
-```bash
-yarn start
-```
