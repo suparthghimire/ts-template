@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import { program } from "commander";
-import { TemplateService } from "./services/template.service";
 import dotenv from "dotenv";
 import prompt from "inquirer";
+import { TemplateService } from "./services/template.service.js";
 
 dotenv.config();
 
