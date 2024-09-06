@@ -27,6 +27,7 @@
     "dist",
     "templates"
   ],
+  "type": "module",
   "name": "@suparth_ghimire/ts-template",
   "version": "2.1.0",
   "main": "dist/index.js",
