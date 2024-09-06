@@ -1,5 +1,11 @@
 # @suparth_ghimire/ts-template
 
+## 2.2.1
+
+### Patch Changes
+
+- fixed esmodule issue
+
 ## 2.2.0
 
 ### Minor Changes
