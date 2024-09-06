@@ -1,5 +1,11 @@
 # @suparth_ghimire/ts-template
 
+## 2.2.0
+
+### Minor Changes
+
+- a24884a: added esm release
+
 ## 2.1.0
 
 ### Minor Changes
