@@ -20,31 +20,48 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: node - setup
+
+        # setup node
+      - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: 20.x
+          node-version: "20.12.2"
 
-      # pnpm stuff
-      - name: pnpm - install
-        run: npm i pnpm@latest -g
-      - name: pnpm - config
-        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
-      - name: pnpm - install
+      # Pnpm stuff
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9.5
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
         run: pnpm install
 
       # build
       - name: build
         run: pnpm run build
 
-      # publish to npm
-      - name: release
-        id: changesets
-        uses: changesets/action@master
-        with:
-          publish: pnpm run release
-          version: pnpm version-packages
-          commit: "chore: version packages"
-          title: "chore: version packages"
+      - name: Set Git Credentials
+        run: |
+          git config user.name "${GITHUB_ACTOR}" 
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - name: Release It 🚀
+        run: pnpm run ci:release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
