@@ -1,5 +1,7 @@
 
 
+## [2.2.6](https://github.com/suparthghimire/ts-template/compare/v2.2.5...v2.2.6) (2024-09-10)
+
 ## [2.2.5](https://github.com/suparthghimire/ts-template/compare/v2.2.4...v2.2.5) (2024-09-10)
 
 # @suparth_ghimire/ts-template
